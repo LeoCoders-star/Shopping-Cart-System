@@ -18,7 +18,7 @@ public class JavaProject5 {
             System.out.print("\n=====================================");
             System.out.print("\n1. Add Product");
             System.out.print("\n2. View Card");
-
+            System.out.print("\n3. Exit");
             System.out.print("\nChoose option: ");
             startMenu = input.nextInt();
 
@@ -26,9 +26,17 @@ public class JavaProject5 {
                 case 1:
                     add();
                     break;
-        
-                default:
+
+                case 2:
+                    viewCartScreen();
                     break;
+        
+                case 3:
+                    System.out.print("\nThank you for using Shopping Cart System.");
+                    System.out.print("\nProgram terminated.");
+                    return;
+                default:
+                    System.out.print("\nInvalid Option!\n\n");
             }
         }
     }
@@ -106,6 +114,31 @@ public class JavaProject5 {
 
         pressEnterToContinue();
 
+    }
+
+    public static double calculateSubtotal(double price, int quantity) {
+        return price * quantity;
+    }
+
+    public static void viewCartScreen() {
+        int position =0;
+
+        System.out.print("\n=====================================");
+        System.out.print("\n              YOUR CART");
+        System.out.print("\n=====================================\n");
+        System.out.printf("%-4s %-12s %-8s %-6s %-10s\n",
+                            "No", "Product", "Price", "Qty", "Subtotal");
+        System.out.print("------------------------------------------------\n");
+
+        for (int i = 0; i < index; i++) {
+            double subTotal = calculateSubtotal(productPrice[i], productQuantity[i]);
+            System.out.printf( "%-4s %-12s %-8.2f %-6s %-10.2f\n", 
+                                i + 1 , productName[i], productPrice[i], productQuantity[i], subTotal);
+        }
+
+        System.out.print("------------------------------------------------\n\n");
+        System.out.print("\nTotal Items: " + index);
+        pressEnterToContinue();
     }
 
     public static void main(String[] args) {
