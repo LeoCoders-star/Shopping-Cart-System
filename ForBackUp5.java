@@ -18,7 +18,8 @@ public class ForBackUp5 {
             System.out.print("\n=====================================");
             System.out.print("\n1. Add Product");
             System.out.print("\n2. View Card");
-            System.out.print("\n3. Exit");
+            System.out.print("\n3. Remove Product");
+            System.out.print("\n4. Exit");
             System.out.print("\nChoose option: ");
             startMenu = input.nextInt();
 
@@ -30,8 +31,12 @@ public class ForBackUp5 {
                 case 2:
                     viewCartScreen();
                     break;
-        
+
                 case 3:
+                    removeProduct();
+                    break;
+        
+                case 4:
                     System.out.print("\nThank you for using Shopping Cart System.");
                     System.out.print("\nProgram terminated.");
                     return;
@@ -139,6 +144,40 @@ public class ForBackUp5 {
         System.out.print("------------------------------------------------\n\n");
         System.out.print("\nTotal Items: " + index);
         pressEnterToContinue();
+    }
+
+    public static void removeProduct() {
+
+        Scanner input = new Scanner(System.in);
+        int numDelete;
+
+        System.out.print("\n=====================================");
+        System.out.print("\n          REMOVE PRODUCT");
+        System.out.print("\n=====================================\n");
+
+        for (int i = 0; i < index; i++) {
+            System.out.print("\n" + (i + 1) + ". " + productName[i]);
+        }
+
+        System.out.print("\n\nEnter product number to remove: ");
+        numDelete = input.nextInt();
+
+        deleteProduct(numDelete - 1);
+
+        System.out.print("\nProduct removed successfully!\n");
+
+        pressEnterToContinue();
+    }
+
+    public static void deleteProduct(int numDelete) {
+
+        for (int i = numDelete; i < index - 1; i++) {
+            productName[i] = productName[i + 1];
+            productPrice[i] = productPrice[i + 1];
+            productQuantity[i] = productQuantity[i + 1];
+        }
+
+        index--;
     }
 
     public static void main(String[] args) {
