@@ -19,7 +19,8 @@ public class ForBackUp5 {
             System.out.print("\n1. Add Product");
             System.out.print("\n2. View Card");
             System.out.print("\n3. Remove Product");
-            System.out.print("\n4. Exit");
+            System.out.print("\n4. Checkout");
+            System.out.print("\n5. Exit");
             System.out.print("\nChoose option: ");
             startMenu = input.nextInt();
 
@@ -35,8 +36,12 @@ public class ForBackUp5 {
                 case 3:
                     removeProduct();
                     break;
-        
+
                 case 4:
+                    checkOut();
+                    break;
+        
+                case 5:
                     System.out.print("\nThank you for using Shopping Cart System.");
                     System.out.print("\nProgram terminated.");
                     return;
@@ -126,7 +131,6 @@ public class ForBackUp5 {
     }
 
     public static void viewCartScreen() {
-        int position =0;
 
         System.out.print("\n=====================================");
         System.out.print("\n              YOUR CART");
@@ -178,6 +182,44 @@ public class ForBackUp5 {
         }
 
         index--;
+    }
+
+    public static double calculateDiscount(double total) {
+        if (total > 200) {
+            return total * 0.1;
+        } else {
+            return 0;
+        }
+    }
+
+    public static void checkOut() {
+
+        double total = 0, discount, totalPayment;
+
+        System.out.print("\n=====================================");
+        System.out.print("\n              CHECKOUT");
+        System.out.print("\n=====================================\n");
+
+        for (int i = 0; i < index; i++) {
+            double subTotal = calculateSubtotal(productPrice[i], productQuantity[i]);
+            System.out.printf("%-17s  %-12s RM%-5.2f", 
+                                        productName[i], "x"+productQuantity[i], subTotal
+            );
+            total += subTotal;
+        }
+
+        discount = calculateDiscount(total);
+        totalPayment = total - discount;
+
+        System.out.print("\n\n-------------------------------------");
+        System.out.printf("\nSubtotal:                       RM%.2f", total);
+        System.out.printf("\nDiscount:                       RM%.2f", discount);
+        System.out.print("\n-------------------------------------");
+        System.out.printf("\nTOTAL PAYMENT:                  RM%.2f", totalPayment);
+        System.out.print("\n-------------------------------------");
+
+        System.out.print("\n\nThank you for shopping!\n");
+        pressEnterToContinue();
     }
 
     public static void main(String[] args) {
